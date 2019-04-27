@@ -69,7 +69,7 @@ Public MustInherit Class ContainerListViewObject
     ''' </summary>
     ''' <returns>An object that is a Clone of the current instance.</returns>
     ''' <remarks></remarks>
-    Public MustOverride Function Clone() As Object Implements System.ICloneable.Clone
+    Public MustOverride Function Clone() As Object Implements ICloneable.Clone
 
     ''' <summary>
     ''' Gets a value that determines if the ContainerListViewObject has a parent.
@@ -278,9 +278,9 @@ Public MustInherit Class ContainerListViewObject
     ''' </summary>
     ''' <value><c>TRUE</c> if the item has focus; otherwise, <c>FALSE</c>.</value>
     ''' <remarks></remarks>
-    <Browsable(False), _
-     EditorBrowsable(EditorBrowsableState.Never), _
-     DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)> _
+    <Browsable(False),
+     EditorBrowsable(EditorBrowsableState.Never),
+     DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Friend Property Focused() As Boolean
         Get
             Return Me._Focused
@@ -401,10 +401,10 @@ Public MustInherit Class ContainerListViewObject
     <Category("Appearance"), _
      DefaultValue(-1), _
      Localizable(True), _
-     TypeConverter(GetType(System.Windows.Forms.ImageIndexConverter)), _
+     TypeConverter(GetType(ImageIndexConverter)), _
      Description("The Index of the image that is displayed for the item."), _
      DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), _
-     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(System.Drawing.Design.UITypeEditor))> _
+     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))> _
     Public Property ImageIndex() As Integer
         Get
             Return Me._ImgIndex
@@ -467,7 +467,7 @@ Public MustInherit Class ContainerListViewObject
     <Category("Data"), _
      Description("The SubItems of the ContainerListViewObject."), _
      DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), _
-     Editor(GetType(CollectionEditor), GetType(System.Drawing.Design.UITypeEditor))> _
+     Editor(GetType(CollectionEditor), GetType(UITypeEditor))> _
     Public ReadOnly Property SubItems() As ContainerListViewSubItemCollection
         Get
             Return _SubItems
@@ -484,7 +484,7 @@ Public MustInherit Class ContainerListViewObject
      Localizable(False), _
      DefaultValue(GetType(Object), Nothing), _
      Description("Data to associate with the item"), _
-     TypeConverter(GetType(System.ComponentModel.StringConverter))> _
+     TypeConverter(GetType(StringConverter))> _
     Public Property Tag() As Object
         Get
             Return Me._Tag
@@ -713,12 +713,12 @@ Public MustInherit Class ContainerListViewObject
     Protected Shared Sub Parse(ByVal aObject As ContainerListViewObject, ByVal aXmlNode As XmlNode)
         If (Not (aObject Is Nothing OrElse aXmlNode Is Nothing)) Then
             Dim XNode As XmlNode = Nothing
-            Dim Atts() As Reflection.PropertyInfo = Nothing
+            Dim Atts() As PropertyInfo = Nothing
 
             If (aXmlNode IsNot Nothing) Then
                 Atts = aObject.GetType.GetProperties(Reflection.BindingFlags.Instance Or Reflection.BindingFlags.Public)
 
-                For Each Prop As Reflection.PropertyInfo In Atts
+                For Each Prop As PropertyInfo In Atts
                     If (Prop.CanWrite) Then
                         XNode = aXmlNode.SelectSingleNode(Prop.Name)
 
@@ -820,7 +820,7 @@ Public MustInherit Class ContainerListViewObject
     <DesignTimeVisible(False), _
      DefaultProperty("Text"), _
      ToolboxItem(False), _
-     TypeConverter(GetType(WinControls.ListView.TypeConverters.ContainerListViewSubItemConverter))> _
+     TypeConverter(GetType(ContainerListViewSubItemConverter))> _
     Public Class ContainerListViewSubItem
         Implements ICloneable
 
@@ -1086,7 +1086,7 @@ Public MustInherit Class ContainerListViewObject
      Localizable(True), _
      DefaultValue(GetType(Object), Nothing), _
      DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), _
-     TypeConverter(GetType(System.ComponentModel.StringConverter))> _
+     TypeConverter(GetType(StringConverter))> _
     Public Property Tag() As Object
             Get
                 Return Me._Tag
@@ -1177,7 +1177,7 @@ Public MustInherit Class ContainerListViewObject
         ''' </summary>
         ''' <returns>An object that is a Clone of the current instance.</returns>
         ''' <remarks></remarks>
-        Public Function Clone() As Object Implements System.ICloneable.Clone
+        Public Function Clone() As Object Implements ICloneable.Clone
             Dim Slvi As New ContainerListViewSubItem
 
             With Slvi
@@ -1205,12 +1205,12 @@ Public MustInherit Class ContainerListViewObject
 
             If (aXmlNode IsNot Nothing) Then
                 Dim XNode As XmlNode = Nothing
-                Dim Atts() As Reflection.PropertyInfo = Nothing
+                Dim Atts() As PropertyInfo = Nothing
 
                 If (aXmlNode IsNot Nothing) Then
                     Atts = Clvsi.GetType.GetProperties(Reflection.BindingFlags.Instance Or Reflection.BindingFlags.Public)
 
-                    For Each Prop As Reflection.PropertyInfo In Atts
+                    For Each Prop As PropertyInfo In Atts
                         If (Prop.CanWrite) Then
                             XNode = aXmlNode.SelectSingleNode(Prop.Name)
 

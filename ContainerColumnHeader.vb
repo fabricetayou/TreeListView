@@ -5,7 +5,7 @@
 <DesignTimeVisible(False), _
  ToolboxItem(False), _
  DefaultProperty("Text"), _
- TypeConverter(GetType(TypeConverters.ContainerColumnHeaderConverter))> _
+ TypeConverter(GetType(ContainerColumnHeaderConverter))> _
 Public Class ContainerColumnHeader
     Inherits Component
     Implements ICloneable
@@ -240,9 +240,9 @@ Public Class ContainerColumnHeader
      DefaultValue(-1), _
      Localizable(True), _
      RefreshProperties(RefreshProperties.Repaint), _
-     TypeConverter(GetType(System.Windows.Forms.ImageIndexConverter)), _
+     TypeConverter(GetType(ImageIndexConverter)), _
      Description("The Index of the image that is displayed for the item."), _
-     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(System.Drawing.Design.UITypeEditor))> _
+     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))> _
     Public Property ImageIndex() As Integer
         Get
             Return Me._ImgIndex
@@ -336,7 +336,7 @@ Public Class ContainerColumnHeader
      Bindable(True), _
      DefaultValue(GetType(Object), Nothing), _
      Description("Data to associate with the item"), _
-     TypeConverter(GetType(System.ComponentModel.StringConverter))> _
+     TypeConverter(GetType(StringConverter))> _
     Public Property Tag() As Object
         Get
             Return Me._Tag
@@ -417,7 +417,7 @@ Public Class ContainerColumnHeader
     ''' </summary>
     ''' <returns>An object that is a Clone of the current instance.</returns>
     ''' <remarks></remarks>
-    Public Function Clone() As Object Implements System.ICloneable.Clone
+    Public Function Clone() As Object Implements ICloneable.Clone
         Dim CH As New ContainerColumnHeader
 
         With CH

@@ -31,7 +31,7 @@ Namespace TypeConverters
         ''' <param name="aDestType">A Type that represents the type you want to convert to.</param>
         ''' <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function CanConvertTo(ByVal aContext As System.ComponentModel.ITypeDescriptorContext, ByVal aDestType As System.Type) As Boolean
+        Public Overloads Overrides Function CanConvertTo(ByVal aContext As ITypeDescriptorContext, ByVal aDestType As Type) As Boolean
             Return (aDestType Is GetType(InstanceDescriptor) OrElse MyBase.CanConvertTo(aContext, aDestType))
         End Function
 
@@ -44,7 +44,7 @@ Namespace TypeConverters
         ''' <param name="aDestType">The Type to convert the aValue parameter to. </param>
         ''' <returns>An Object that represents the converted aValue.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function ConvertTo(ByVal aContext As System.ComponentModel.ITypeDescriptorContext, ByVal aCulture As System.Globalization.CultureInfo, ByVal aValue As Object, ByVal aDestType As System.Type) As Object
+        Public Overloads Overrides Function ConvertTo(ByVal aContext As ITypeDescriptorContext, ByVal aCulture As Globalization.CultureInfo, ByVal aValue As Object, ByVal aDestType As Type) As Object
             If (aDestType Is GetType(InstanceDescriptor) AndAlso (aValue IsNot Nothing AndAlso aValue.GetType Is GetType(ContainerColumnHeader))) Then
                 Dim CH As ContainerColumnHeader = DirectCast(aValue, ContainerColumnHeader)
                 Dim CI As ConstructorInfo = CH.GetType.GetConstructor(Type.EmptyTypes)
@@ -87,7 +87,7 @@ Namespace TypeConverters
         ''' <param name="aDestType">A Type that represents the type you want to convert to.</param>
         ''' <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function CanConvertTo(ByVal aContext As System.ComponentModel.ITypeDescriptorContext, ByVal aDestType As System.Type) As Boolean
+        Public Overloads Overrides Function CanConvertTo(ByVal aContext As ITypeDescriptorContext, ByVal aDestType As Type) As Boolean
             Return (aDestType Is GetType(InstanceDescriptor) OrElse MyBase.CanConvertTo(aContext, aDestType))
         End Function
 
@@ -100,10 +100,10 @@ Namespace TypeConverters
         ''' <param name="aDestType">The Type to convert the aValue parameter to. </param>
         ''' <returns>An Object that represents the converted aValue.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function ConvertTo(ByVal aContext As System.ComponentModel.ITypeDescriptorContext, ByVal aCulture As System.Globalization.CultureInfo, ByVal aValue As Object, ByVal aDestType As System.Type) As Object
+        Public Overloads Overrides Function ConvertTo(ByVal aContext As ITypeDescriptorContext, ByVal aCulture As Globalization.CultureInfo, ByVal aValue As Object, ByVal aDestType As Type) As Object
             If (aDestType Is GetType(InstanceDescriptor) AndAlso aValue.GetType Is GetType(ContainerListViewItem)) Then
                 Dim CI As ConstructorInfo = Nothing
-                Dim SubItms() As ContainerListViewItem.ContainerListViewSubItem = Nothing
+                Dim SubItms() As ContainerListViewObject.ContainerListViewSubItem = Nothing
                 Dim Clvi As ContainerListViewItem = DirectCast(aValue, ContainerListViewItem)
 
                 If (Clvi.SubItems.Count > 0) Then
@@ -111,7 +111,7 @@ Namespace TypeConverters
                     Clvi.SubItems.CopyTo(SubItms, 0)
                 End If
 
-                CI = Clvi.GetType.GetConstructor(New Type() {GetType(String), GetType(Integer), GetType(Color), GetType(Color), GetType(Font), GetType(ContainerListViewItem.ContainerListViewSubItem())})
+                CI = Clvi.GetType.GetConstructor(New Type() {GetType(String), GetType(Integer), GetType(Color), GetType(Color), GetType(Font), GetType(ContainerListViewObject.ContainerListViewSubItem())})
                 If (CI IsNot Nothing) Then
                     Dim Pars() As Object = {Clvi.Text, Clvi.ImageIndex, Clvi.BackColor, Clvi.ForeColor, Clvi.Font, SubItms}
 
@@ -154,7 +154,7 @@ Namespace TypeConverters
         ''' <param name="aDestType">A Type that represents the type you want to convert to.</param>
         ''' <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function CanConvertTo(ByVal aContext As System.ComponentModel.ITypeDescriptorContext, ByVal aDestType As System.Type) As Boolean
+        Public Overloads Overrides Function CanConvertTo(ByVal aContext As ITypeDescriptorContext, ByVal aDestType As Type) As Boolean
             Return (aDestType Is GetType(InstanceDescriptor) OrElse MyBase.CanConvertTo(aContext, aDestType))
         End Function
 
@@ -167,9 +167,9 @@ Namespace TypeConverters
         ''' <param name="aDestType">The Type to convert the aValue parameter to. </param>
         ''' <returns>An Object that represents the converted aValue.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function ConvertTo(ByVal aContext As System.ComponentModel.ITypeDescriptorContext, ByVal aCulture As System.Globalization.CultureInfo, ByVal aValue As Object, ByVal aDestType As System.Type) As Object
-            If (aDestType Is GetType(InstanceDescriptor) AndAlso aValue.GetType Is GetType(ContainerListViewItem.ContainerListViewSubItem)) Then
-                Dim Clvi As ContainerListViewItem.ContainerListViewSubItem = DirectCast(aValue, ContainerListViewItem.ContainerListViewSubItem)
+        Public Overloads Overrides Function ConvertTo(ByVal aContext As ITypeDescriptorContext, ByVal aCulture As Globalization.CultureInfo, ByVal aValue As Object, ByVal aDestType As Type) As Object
+            If (aDestType Is GetType(InstanceDescriptor) AndAlso aValue.GetType Is GetType(ContainerListViewObject.ContainerListViewSubItem)) Then
+                Dim Clvi As ContainerListViewObject.ContainerListViewSubItem = DirectCast(aValue, ContainerListViewObject.ContainerListViewSubItem)
                 Dim CI As ConstructorInfo = Clvi.GetType.GetConstructor(New Type() {GetType(String), GetType(Color), GetType(Color), GetType(Font), GetType(String)})
 
                 If (CI IsNot Nothing) Then
@@ -214,7 +214,7 @@ Namespace TypeConverters
         ''' <param name="destinationType">A Type that represents the type you want to convert to.</param>
         ''' <returns>true if this converter can perform the conversion; otherwise, false.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function CanConvertTo(ByVal context As System.ComponentModel.ITypeDescriptorContext, ByVal destinationType As System.Type) As Boolean
+        Public Overloads Overrides Function CanConvertTo(ByVal context As ITypeDescriptorContext, ByVal destinationType As Type) As Boolean
             Return (destinationType Is GetType(InstanceDescriptor) OrElse MyBase.CanConvertTo(context, destinationType))
         End Function
 
@@ -227,7 +227,7 @@ Namespace TypeConverters
         ''' <param name="destinationType">The Type to convert the aValue parameter to. </param>
         ''' <returns>An Object that represents the converted aValue.</returns>
         ''' <remarks></remarks>
-        Public Overloads Overrides Function ConvertTo(ByVal context As System.ComponentModel.ITypeDescriptorContext, ByVal aCulture As System.Globalization.CultureInfo, ByVal aValue As Object, ByVal destinationType As System.Type) As Object
+        Public Overloads Overrides Function ConvertTo(ByVal context As ITypeDescriptorContext, ByVal aCulture As Globalization.CultureInfo, ByVal aValue As Object, ByVal destinationType As Type) As Object
             If (destinationType Is GetType(InstanceDescriptor) AndAlso aValue.GetType Is GetType(TreeListNode)) Then
                 Dim CI As ConstructorInfo
                 Dim Params() As Object = Nothing

@@ -7,10 +7,10 @@
 <DefaultProperty("Items"), _
  DefaultEvent("AfterSelect"), _
  XmlSchemaProvider("CreateSchema"), _
- Designer(GetType(Design.ContainerListViewDesigner)), _
+ Designer(GetType(ContainerListViewDesigner)), _
  ToolboxBitmap(GetType(ContainerListView), "ContainerListView.png")> _
 Public Class ContainerListView
-    Inherits System.Windows.Forms.Control
+    Inherits Control
     Implements IXmlSerializable
 
 #Region " Constructors and Destructors "
@@ -41,19 +41,19 @@ Public Class ContainerListView
     Private _AllowMultiSelectActivation As Boolean
     Private _AllowColumnResize As Boolean = True
     Private _AlphaComponent As Integer = 65
-    Private _Borderstyle As Enums.BorderStyleType = Enums.BorderStyleType.Fixed3D
+    Private _Borderstyle As BorderStyleType = Enums.BorderStyleType.Fixed3D
     Private _BorderWidth As Integer = 2
     Private _Brush_ColTracking As SolidBrush
     Private _CheckBoxSelection As ItemActivation = ItemActivation.Standard
-    Private _CheckBoxStyle As Enums.CheckBoxStyle = CheckBoxStyle.Flat
-    Private _CheckBoxType As Enums.CheckBoxType = CheckBoxType.CheckBox
-    Private _CheckedItems As Collections.CheckedContainerListViewObjectCollection
+    Private _CheckBoxStyle As CheckBoxStyle = CheckBoxStyle.Flat
+    Private _CheckBoxType As CheckBoxType = CheckBoxType.CheckBox
+    Private _CheckedItems As CheckedContainerListViewObjectCollection
     Private _ColScalePos As Integer
     Private _ColScaleWid As Integer
     Private _ColSortColor As Color = Color.PaleGoldenrod
     Private _ColSortEnabled As Boolean
     Private _ColTrackColor As Color = Color.WhiteSmoke
-    Private _Columns As New Collections.ContainerColumnHeaderCollection(Me)
+    Private _Columns As New ContainerColumnHeaderCollection(Me)
     Private _DisabledColor As Color = Color.Gainsboro
     Private _DoColTracking As Boolean
     Private _DoRowTracking As Boolean
@@ -121,7 +121,7 @@ Public Class ContainerListView
     ''' The variable that represents the default IComparer when sorting.
     ''' </summary>
     ''' <remarks></remarks>
-    Protected _DefaultComparer As New Helpers.ContainerListViewComparer
+    Protected _DefaultComparer As New ContainerListViewComparer
     ''' <summary>
     ''' The variable that represents the last GridColumn that was hovered over by the mouse.
     ''' </summary>
@@ -428,13 +428,13 @@ Public Class ContainerListView
     ''' <value>An enumerated Enums.BorderStyleType value.</value>
     ''' <remarks></remarks>
     <Category("Appearance"), _
-     DefaultValue(GetType(Enums.BorderStyleType), "Fixed3D"), _
+     DefaultValue(GetType(BorderStyleType), "Fixed3D"), _
      Description("Specifies what style the Border the control has.")> _
-    Public Property BorderStyle() As Enums.BorderStyleType
+    Public Property BorderStyle() As BorderStyleType
         Get
             Return Me._Borderstyle
         End Get
-        Set(ByVal Value As Enums.BorderStyleType)
+        Set(ByVal Value As BorderStyleType)
             If (Not Me._Borderstyle.Equals(Value)) Then
                 Me._Borderstyle = Value
                 If (Me._Borderstyle = Windows.Forms.BorderStyle.Fixed3D) Then Me._BorderWidth = 2 Else Me._BorderWidth = 1
@@ -486,13 +486,13 @@ Public Class ContainerListView
     ''' <value>An enumerated CheckBoxStyle value.  The Default is Flat.</value>
     ''' <remarks>Setting this property has no effect if the VisualStyles property is set to <c>TRUE</c>.</remarks>
     <Category("Appearance"), _
-     DefaultValue(GetType(Enums.CheckBoxStyle), "Flat"), _
+     DefaultValue(GetType(CheckBoxStyle), "Flat"), _
      Description("Determines the style of CheckBox if VisualStyles is NOT enabled.")> _
-    Public Property CheckBoxStyle() As Enums.CheckBoxStyle
+    Public Property CheckBoxStyle() As CheckBoxStyle
         Get
             Return Me._CheckBoxStyle
         End Get
-        Set(ByVal Value As Enums.CheckBoxStyle)
+        Set(ByVal Value As CheckBoxStyle)
             If (Not Me._CheckBoxStyle.Equals(Value)) Then
                 Me._CheckBoxStyle = Value
                 Me.Invalidate(Me.ClientRectangle)
@@ -506,13 +506,13 @@ Public Class ContainerListView
     ''' <value>An enumerated CheckBoxType value.  Default is CheckBox.</value>
     ''' <remarks></remarks>
     <Category("Appearance"), _
-     DefaultValue(GetType(Enums.CheckBoxType), "CheckBox"), _
+     DefaultValue(GetType(CheckBoxType), "CheckBox"), _
      Description("The type of CheckBox to display.")> _
-    Public Property CheckBoxType() As Enums.CheckBoxType
+    Public Property CheckBoxType() As CheckBoxType
         Get
             Return Me._CheckBoxType
         End Get
-        Set(ByVal Value As Enums.CheckBoxType)
+        Set(ByVal Value As CheckBoxType)
             If (Not Me._CheckBoxType.Equals(Value)) Then
                 Me._CheckBoxType = Value
                 Me.Invalidate(Me.ClientRectangle)
@@ -611,7 +611,7 @@ Public Class ContainerListView
     <Category("Data"), _
      Description("The Columns of the control."), _
      DesignerSerializationVisibility(DesignerSerializationVisibility.Content), _
-     Editor(GetType(System.ComponentModel.Design.CollectionEditor), GetType(UITypeEditor))> _
+     Editor(GetType(CollectionEditor), GetType(UITypeEditor))> _
     Public ReadOnly Property Columns() As ContainerColumnHeaderCollection
         Get
             Return Me._Columns
@@ -714,11 +714,11 @@ Public Class ContainerListView
      EditorBrowsable(EditorBrowsableState.Never), _
      Obsolete("While Microsoft has the ContextMenu available for backwards compatibility, this control does not support it so please use the ContextMenuStrip " & _
               "instead.", True)> _
-    Public NotOverridable Overrides Property ContextMenu() As System.Windows.Forms.ContextMenu
+    Public NotOverridable Overrides Property ContextMenu() As ContextMenu
         Get
             Return Nothing
         End Get
-        Set(ByVal Value As System.Windows.Forms.ContextMenu)
+        Set(ByVal Value As ContextMenu)
 
         End Set
     End Property
@@ -812,11 +812,11 @@ Public Class ContainerListView
     <Category("Appearance"), _
      DefaultValue(GetType(Font), "System.Drawing.SystemFonts.DefaultFont"), _
      Description("The Font used to display text in the control.")> _
-    Public Overrides Property Font() As System.Drawing.Font
+    Public Overrides Property Font() As Font
         Get
             Return MyBase.Font
         End Get
-        Set(ByVal Value As System.Drawing.Font)
+        Set(ByVal Value As Font)
             If (Not MyBase.Font.Equals(Value)) Then
                 MyBase.Font = Value
                 Me._baseFontChanged()
@@ -832,11 +832,11 @@ Public Class ContainerListView
     <Category("Appearance"), _
      DefaultValue(GetType(Color), "WindowText"), _
      Description("The foreground color used to display text and graphics in the control.")> _
-    Public Overrides Property ForeColor() As System.Drawing.Color
+    Public Overrides Property ForeColor() As Color
         Get
             Return MyBase.ForeColor
         End Get
-        Set(ByVal Value As System.Drawing.Color)
+        Set(ByVal Value As Color)
             If (Not MyBase.ForeColor.Equals(Value)) Then
                 MyBase.ForeColor = Value
                 Me._baseForeColorChanged()
@@ -1393,7 +1393,7 @@ Public Class ContainerListView
     ''' <param name="aObject">The Object to set if a match was found in the HashTable.</param>
     ''' <returns><c>TRUE</c> if a match was found; otherwise <c>FALSE</c>.</returns>
     ''' <remarks></remarks>
-    Protected Function CheckBoxClicked(ByVal aHashTableToCheck As Hashtable, ByVal e As System.Windows.Forms.MouseEventArgs, ByRef aObject As Object) As Boolean
+    Protected Function CheckBoxClicked(ByVal aHashTableToCheck As Hashtable, ByVal e As MouseEventArgs, ByRef aObject As Object) As Boolean
         Dim Result As Boolean = False
 
         If (aHashTableToCheck IsNot Nothing) Then
@@ -1467,7 +1467,7 @@ Public Class ContainerListView
     ''' <remarks></remarks>
     <EditorBrowsable(EditorBrowsableState.Never)> _
     Friend Sub ContainerListViewAfterCheckStateChanged(ByVal aItem As ContainerListViewObject)
-        If (aItem IsNot Nothing) Then Me.OnAfterCheckStateChanged(New EventArgClasses.ContainerListViewEventArgs(aItem))
+        If (aItem IsNot Nothing) Then Me.OnAfterCheckStateChanged(New ContainerListViewEventArgs(aItem))
     End Sub
 
     ''' <summary>
@@ -1479,7 +1479,7 @@ Public Class ContainerListView
     <EditorBrowsable(EditorBrowsableState.Never)> _
     Friend Function ContainerListViewBeforeCheckStateChanged(ByVal aItem As ContainerListViewObject) As Boolean
         If (aItem IsNot Nothing) Then
-            Dim Arg As New EventArgClasses.ContainerListViewCancelEventArgs(aItem, False)
+            Dim Arg As New ContainerListViewCancelEventArgs(aItem, False)
             Me.OnBeforeCheckStateChanged(Arg)
 
             Return Arg.Cancel
@@ -1500,7 +1500,7 @@ Public Class ContainerListView
     ''' </para>
     ''' </remarks>
     <EditorBrowsable(EditorBrowsableState.Never)> _
-    Public Shared Function CreateSchema(ByVal aSchemaSet As System.Xml.Schema.XmlSchemaSet) As XmlQualifiedName
+    Public Shared Function CreateSchema(ByVal aSchemaSet As XmlSchemaSet) As XmlQualifiedName
         Return New XmlQualifiedName()
     End Function
 
@@ -1511,7 +1511,7 @@ Public Class ContainerListView
     ''' <param name="aSubItem">Optional.  A SubItem.</param>
     ''' <returns>A Color based on the state of aObj.</returns>
     ''' <remarks></remarks>
-    Protected Overridable Function DetermineBackGroundColor(ByVal aObj As ContainerListViewObject, Optional ByVal aSubItem As ContainerListViewItem.ContainerListViewSubItem = Nothing) As Color
+    Protected Overridable Function DetermineBackGroundColor(ByVal aObj As ContainerListViewObject, Optional ByVal aSubItem As ContainerListViewObject.ContainerListViewSubItem = Nothing) As Color
         Return Me._determineBackGroundColor(aObj, aSubItem)
     End Function
 
@@ -1527,7 +1527,7 @@ Public Class ContainerListView
             Dim Hdc As IntPtr
             Dim Theme As IntPtr
             Dim State As Integer
-            Dim Rect1, Rect2 As Helpers.VisualStyles.RECT
+            Dim Rect1, Rect2 As VisualStyles.RECT
             Dim MsPnt As Point = Me.PointToClient(Control.MousePosition)
 
             'DRAW THE HEADER BACKGROUND
@@ -1535,8 +1535,8 @@ Public Class ContainerListView
                 'SET THE VARIABLES
                 Hdc = aGr.GetHdc()
                 Theme = Helpers.VisualStyles.OpenThemeData(Me.Handle, "BUTTON")
-                Rect1 = New Helpers.VisualStyles.RECT(Rect)
-                Rect2 = New Helpers.VisualStyles.RECT(Rect)
+                Rect1 = New VisualStyles.RECT(Rect)
+                Rect2 = New VisualStyles.RECT(Rect)
 
                 'DETERMINE THE STATE
                 If (aObj.Checked) Then
@@ -1678,8 +1678,8 @@ Public Class ContainerListView
     ''' </remarks>
     <EditorBrowsable(EditorBrowsableState.Never), _
      Obsolete("This method will soon be removed from the .NET Framework", True)> _
-    Public Function GetSchema() As System.Xml.Schema.XmlSchema Implements System.Xml.Serialization.IXmlSerializable.GetSchema
-        Throw New System.NotImplementedException("This method is not supported by the .NET Framework")
+    Public Function GetSchema() As XmlSchema Implements IXmlSerializable.GetSchema
+        Throw New NotImplementedException("This method is not supported by the .NET Framework")
     End Function
 
     ''' <summary>
@@ -1946,7 +1946,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">An EventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnGotFocus(ByVal e As System.EventArgs)
+    Protected Overrides Sub OnGotFocus(ByVal e As EventArgs)
         MyBase.OnGotFocus(e)
 
         Me._IsFocused = True
@@ -1967,7 +1967,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A KeyEventArgs containing the data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnKeyDown(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overrides Sub OnKeyDown(ByVal e As KeyEventArgs)
         Me.OnCheckShiftState(e)
 
         Select Case e.KeyCode
@@ -2001,7 +2001,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A KeyEventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnKeyUp(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overrides Sub OnKeyUp(ByVal e As KeyEventArgs)
         MyBase.OnKeyUp(e)
 
         If (Not e.Shift) Then Me._MultiSelectMode = MultiSelectModes.Single
@@ -2012,7 +2012,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">An EventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnLostFocus(ByVal e As System.EventArgs)
+    Protected Overrides Sub OnLostFocus(ByVal e As EventArgs)
         MyBase.OnLostFocus(e)
 
         Me._IsFocused = False
@@ -2146,7 +2146,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A MouseEventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnMouseMove(ByVal e As System.Windows.Forms.MouseEventArgs)
+    Protected Overrides Sub OnMouseMove(ByVal e As MouseEventArgs)
         MyBase.OnMouseMove(e)
 
         If (Me._LastRowHovered IsNot Nothing) Then
@@ -2241,7 +2241,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A MouseEventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnMouseUp(ByVal e As System.Windows.Forms.MouseEventArgs)
+    Protected Overrides Sub OnMouseUp(ByVal e As MouseEventArgs)
         MyBase.OnMouseUp(e)
 
         'MISC
@@ -2300,7 +2300,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A MouseEventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnMouseWheel(ByVal e As System.Windows.Forms.MouseEventArgs)
+    Protected Overrides Sub OnMouseWheel(ByVal e As MouseEventArgs)
         Dim HsDelta As Integer = Me._HscrollBar.Value - Me._HscrollBar.SmallChange * CType(e.Delta / 100, Integer)
         Dim VsDelta As Integer = Me._VscrollBar.Value - Me._VscrollBar.SmallChange * CType(e.Delta / 100, Integer)
 
@@ -2327,7 +2327,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A PaintEventArg to pass.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
+    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
         Dim Gr As Graphics = e.Graphics
         Dim Rect As Rectangle = Me.ClientRectangle
 
@@ -2418,7 +2418,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">an EventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnResize(ByVal e As System.EventArgs)
+    Protected Overrides Sub OnResize(ByVal e As EventArgs)
         MyBase.OnResize(e)
 
         Me._generateHeaderRect()
@@ -2468,7 +2468,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="e">A KeyEventArgs.</param>
     ''' <remarks></remarks>
-    Protected Overridable Sub OnSpaceBarKey(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overridable Sub OnSpaceBarKey(ByVal e As KeyEventArgs)
         If (e.Shift) Then
             For Each ClObj As ContainerListViewObject In Me._SelectedItems
                 If (ClObj.CheckBoxVisible AndAlso ClObj.CheckBoxEnabled) Then ClObj.Checked = Not ClObj.Checked
@@ -2518,7 +2518,7 @@ Public Class ContainerListView
             For Each Col As ContainerColumnHeader In Me._Columns
                 If (Col.Bounds.Contains(e.X, e.Y)) Then
                     Dim SelList As New ArrayList(1)
-                    Dim Svc As System.ComponentModel.Design.ISelectionService = DirectCast(Me.GetService(GetType(System.ComponentModel.Design.ISelectionService)), System.ComponentModel.Design.ISelectionService)
+                    Dim Svc As ISelectionService = DirectCast(Me.GetService(GetType(ISelectionService)), ISelectionService)
 
                     SelList.Add(Col)
                     Svc.SetSelectedComponents(SelList, SelectionTypes.Auto)
@@ -2534,7 +2534,7 @@ Public Class ContainerListView
     ''' <remarks>
     ''' See the <see cref="T:System.Xml.Serialization.IXmlSerializable"/> interface for more details.
     ''' </remarks>
-    Public Sub ReadXml(ByVal aReader As System.Xml.XmlReader) Implements System.Xml.Serialization.IXmlSerializable.ReadXml
+    Public Sub ReadXml(ByVal aReader As XmlReader) Implements IXmlSerializable.ReadXml
         Me.BeginUpdate()
         Me._readXml(aReader, Me, String.Empty)
         aReader.Close()
@@ -2604,7 +2604,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="m">A Windows message.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
+    Protected Overrides Sub WndProc(ByRef m As Message)
         MyBase.WndProc(m)
 
         'THIS LINE MAKES ARROW AND TAB KEY EVENTS CAUSE OnKeyXXX EVENTS TO FIRE
@@ -2618,7 +2618,7 @@ Public Class ContainerListView
     ''' </summary>
     ''' <param name="aWriter">The XmlWriter stream to which the object is serialized.</param>
     ''' <remarks>See the <see cref="T:System.Xml.Serialization.IXmlSerializable"/> interface for more details.</remarks>
-    Public Sub WriteXml(ByVal aWriter As System.Xml.XmlWriter) Implements System.Xml.Serialization.IXmlSerializable.WriteXml
+    Public Sub WriteXml(ByVal aWriter As XmlWriter) Implements IXmlSerializable.WriteXml
         'SET SOME SPECIFIC SETTINGS
         With aWriter
             .WriteComment(" " & Date.Now.ToString("MM/dd/yyyy") & " ")
@@ -2726,7 +2726,7 @@ Public Class ContainerListView
             Itm.ChangeGlobalFont(Me.Font)
 
             'NOW DO THE SUBITEMS
-            For Each SU As ContainerListViewItem.ContainerListViewSubItem In Itm.SubItems
+            For Each SU As ContainerListViewObject.ContainerListViewSubItem In Itm.SubItems
                 SU.ChangeGlobalFont(Me.Font)
             Next
         Next
@@ -2739,7 +2739,7 @@ Public Class ContainerListView
             Itm.ChangeGlobalForeColor(Me.ForeColor)
 
             'NOW DO THE SUBITEMS
-            For Each SU As ContainerListViewItem.ContainerListViewSubItem In Itm.SubItems
+            For Each SU As ContainerListViewObject.ContainerListViewSubItem In Itm.SubItems
                 SU.ChangeGlobalForeColor(Me.ForeColor)
             Next
         Next
@@ -2760,7 +2760,7 @@ Public Class ContainerListView
         RemoveHandler Me._Columns.ItemsChanged, AddressOf Me._columnCollectionChangedHandler
     End Sub
 
-    Private Function _determineBackGroundColor(ByVal aObj As ContainerListViewObject, Optional ByVal aSubItem As ContainerListViewItem.ContainerListViewSubItem = Nothing) As Color
+    Private Function _determineBackGroundColor(ByVal aObj As ContainerListViewObject, Optional ByVal aSubItem As ContainerListViewObject.ContainerListViewSubItem = Nothing) As Color
         Dim BrushColor As Color = Color.Empty
 
         'LISTED IN ORDER OF PRECEDENCE
@@ -2946,7 +2946,7 @@ Public Class ContainerListView
             Dim Lp As Integer = Rect.Left
             Dim Tp As Integer = Rect.Top + 2
             Dim LpScr As Integer = Lp - Me.HScroll.Value
-            Dim Rect1, Rect2 As Helpers.VisualStyles.RECT
+            Dim Rect1, Rect2 As VisualStyles.RECT
 
             'Me.CalcSpringWids(Rect)
             Dim RectWdth As Integer = Rect.Left + Rect.Width
@@ -2977,8 +2977,8 @@ Public Class ContainerListView
                         'SET THE VARIABLES
                         Hdc = aGr.GetHdc()
                         Theme = Helpers.VisualStyles.OpenThemeData(Me.Handle, "HEADER")
-                        Rect1 = New Helpers.VisualStyles.RECT(ColRect.Left, ColRect.Top, ColRect.Right, ColRect.Bottom - 2)
-                        Rect2 = New Helpers.VisualStyles.RECT(Lp, Tp, Rect.Width - 6, Me.HeaderBuffer)
+                        Rect1 = New VisualStyles.RECT(ColRect.Left, ColRect.Top, ColRect.Right, ColRect.Bottom - 2)
+                        Rect2 = New VisualStyles.RECT(Lp, Tp, Rect.Width - 6, Me.HeaderBuffer)
 
                         'DO THE DRAWING
                         Helpers.VisualStyles.DrawThemeBackground(Theme, Hdc, 1, State, Rect1, Rect2)
@@ -3034,8 +3034,8 @@ Public Class ContainerListView
                     'SET VARIABLES
                     Hdc = aGr.GetHdc
                     Theme = Helpers.VisualStyles.OpenThemeData(Me.Handle, "HEADER")
-                    Rect1 = New Helpers.VisualStyles.RECT(LpScr + Last, Tp, Rect.Width - Last - 2 + Me._HscrollBar.Value, Me._HdrBuffer)
-                    Rect2 = New Helpers.VisualStyles.RECT(Rect.Left, Tp, Rect.Width, Me._HdrBuffer)
+                    Rect1 = New VisualStyles.RECT(LpScr + Last, Tp, Rect.Width - Last - 2 + Me._HscrollBar.Value, Me._HdrBuffer)
+                    Rect2 = New VisualStyles.RECT(Rect.Left, Tp, Rect.Width, Me._HdrBuffer)
 
                     'DO THE DRAWING
                     Helpers.VisualStyles.DrawThemeBackground(Theme, Hdc, 1, 1, Rect1, Rect2)
@@ -3195,7 +3195,7 @@ Public Class ContainerListView
         Me._CheckedItems = New CheckedContainerListViewObjectCollection(Me)
         Me._HiddenCols = New HiddenColumnsCollection(Me)
         Me.Size = New Size(200, 150)
-        MyBase.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular)
+        MyBase.Font = New Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular)
         MyBase.BackColor = SystemColors.Window
         MyBase.ForeColor = SystemColors.WindowText
 
@@ -3229,7 +3229,7 @@ Public Class ContainerListView
         Me._generateHeaderRect()
     End Sub
 
-    Private Sub _readXml(ByVal aReader As System.Xml.XmlReader, ByVal aObject As Object, ByVal aExitName As String)
+    Private Sub _readXml(ByVal aReader As XmlReader, ByVal aObject As Object, ByVal aExitName As String)
         Dim ExcProps As Specialized.StringCollection = Nothing
         Dim Prop As PropertyInfo = Nothing
         Dim PropName As String = String.Empty
@@ -3385,7 +3385,7 @@ Public Class ContainerListView
 
                 While (K < aItem.SubItems.Count AndAlso K < (Me._Columns.Count - 1))
                     Dim aCol As ContainerColumnHeader = Me._Columns(K)
-                    Dim SubItem As ContainerListViewItem.ContainerListViewSubItem = aItem.SubItems(K)
+                    Dim SubItem As ContainerListViewObject.ContainerListViewSubItem = aItem.SubItems(K)
                     Dim SubItemRect As Rectangle = SubItem.Bounds
                     Dim SubItemBrush As SolidBrush = New SolidBrush(Me._determineBackGroundColor(aItem, SubItem))
                     Dim SubItemAlign As HorizontalAlignment
@@ -3553,11 +3553,11 @@ Public Class ContainerListView
         End If
     End Sub
 
-    Private Sub _writeXml(ByVal aObject As Object, ByVal aWriter As System.Xml.XmlWriter)
+    Private Sub _writeXml(ByVal aObject As Object, ByVal aWriter As XmlWriter)
         Dim Atts() As Object = Nothing
         Dim DefVal As DefaultValueAttribute
         Dim ExcludedProps As Specialized.StringCollection
-        Dim MyProps() As Reflection.PropertyInfo
+        Dim MyProps() As PropertyInfo
         Dim ObjTyp As Type = aObject.GetType()
         Dim PropVal As Object
         Dim TmpFont01 As Font
@@ -3568,14 +3568,14 @@ Public Class ContainerListView
         'GET THE PROPERTIES AND SORT
         ExcludedProps = Me._getExcludedProps()
         MyProps = aObject.GetType.GetProperties(Reflection.BindingFlags.Public Or Reflection.BindingFlags.Instance)
-        Array.Sort(MyProps, New Helpers.PropInfoViewComparer(SortOrder.Ascending))
+        Array.Sort(MyProps, New PropInfoViewComparer(SortOrder.Ascending))
 
         'START WRITING
         With aWriter
             .WriteStartElement(ObjTyp.Name, ObjTyp.Namespace)
 
             'GET ALL THE PROPERTY VALUES
-            For Each PI As Reflection.PropertyInfo In MyProps
+            For Each PI As PropertyInfo In MyProps
                 WriteProp = False
                 Atts = PI.GetCustomAttributes(GetType(XmlIgnoreAttribute), False)
 

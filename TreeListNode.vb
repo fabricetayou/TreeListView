@@ -6,7 +6,7 @@
 ''' <remarks></remarks>
 <Serializable(), _
  DesignTimeVisible(False), _
- TypeConverter(GetType(WinControls.ListView.TypeConverters.TreeListNodeConverter))> _
+ TypeConverter(GetType(TreeListNodeConverter))> _
 Public Class TreeListNode
     Inherits ContainerListViewObject
 
@@ -387,8 +387,8 @@ Public Class TreeListNode
      DefaultValue(-1), _
      Description("The index of the image that is displayed for the TreeListNode when it is in a selected state."), _
      DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), _
-     TypeConverter(GetType(System.Windows.Forms.ImageIndexConverter)), _
-     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(System.Drawing.Design.UITypeEditor))> _
+     TypeConverter(GetType(ImageIndexConverter)), _
+     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))> _
     Public Property SelectedImageIndex() As Integer
         Get
             Return Me._SelImageIndex
@@ -996,7 +996,7 @@ Public Class TreeListNode
             Dim Name As String = aPropName.Trim
 
             If (Not Name.Equals(String.Empty)) Then
-                Dim Prop As Reflection.PropertyInfo = Me._RootNode.GetType.GetProperty(Name)
+                Dim Prop As PropertyInfo = Me._RootNode.GetType.GetProperty(Name)
 
                 If (Prop IsNot Nothing AndAlso Prop.CanWrite) Then
                     Dim Ndes() As TreeListNode = Me.GetBranchNodes

@@ -171,7 +171,7 @@
         ''' <param name="aVal">The New value of the object the action is performed on.</param>
         ''' <param name="aPrevVal">The Previous value of the object before it changed.</param>
         ''' <remarks></remarks>
-        Public Sub New(ByVal aIndex As Integer, ByVal aAction As Enums.CollectionActions, ByVal aVal As Object, Optional ByVal aPrevVal As Object = Nothing)
+        Public Sub New(ByVal aIndex As Integer, ByVal aAction As CollectionActions, ByVal aVal As Object, Optional ByVal aPrevVal As Object = Nothing)
             Me._Index = aIndex
             Me._Action = aAction
             Me._NewVal = aVal
@@ -184,7 +184,7 @@
         Private _Index As Integer = -1
         Private _NewVal As Object = Nothing
         Private _OldVal As Object = Nothing
-        Private _Action As Enums.CollectionActions = Enums.CollectionActions.Nothing
+        Private _Action As CollectionActions = Enums.CollectionActions.Nothing
 #End Region
 
 #Region " Properties "
@@ -194,7 +194,7 @@
         ''' </summary>
         ''' <value>An enumerated CollectionActions value.</value>
         ''' <remarks></remarks>
-        Public ReadOnly Property Action() As Enums.CollectionActions
+        Public ReadOnly Property Action() As CollectionActions
             Get
                 Return Me._Action
             End Get

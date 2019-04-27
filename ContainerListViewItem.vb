@@ -5,7 +5,7 @@
 <DesignTimeVisible(False), _
  ToolboxItem(False), _
  DefaultProperty("Text"), _
- TypeConverter(GetType(WinControls.ListView.TypeConverters.ContainerListViewItemConverter))> _
+ TypeConverter(GetType(ContainerListViewItemConverter))> _
 Public Class ContainerListViewItem
     Inherits ContainerListViewObject
 
@@ -174,8 +174,8 @@ Public Class ContainerListViewItem
      Localizable(True), _
      DefaultValue(-1), _
      Description("Not Supported." & ControlChars.CrLf & "The index of the state image (an image such as a checked or cleared check box that indicates the state of the item) that is displayed for the item."), _
-     TypeConverter(GetType(System.Windows.Forms.ImageIndexConverter)), _
-     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(System.Drawing.Design.UITypeEditor))> _
+     TypeConverter(GetType(ImageIndexConverter)), _
+     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))> _
     Public Property StateImageIndex() As Integer
         Get
             Return Me._StateImgIndex

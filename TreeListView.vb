@@ -4,10 +4,10 @@ Imports WinControls.ListView.ContainerListViewItem
 ''' TreeListView Class.
 ''' </summary>
 ''' <remarks></remarks>
-<DefaultProperty("Nodes"), _
- DefaultEvent("AfterSelect"), _
- Designer(GetType(Design.TreeListViewDesigner)), _
- ToolboxBitmap(GetType(TreeListView), "TreeListView.png")> _
+<DefaultProperty("Nodes"),
+ DefaultEvent("AfterSelect"),
+ Designer(GetType(TreeListViewDesigner)),
+ ToolboxBitmap(GetType(TreeListView), "TreeListView.png")>
 Public Class TreeListView
     Inherits ContainerListView
 
@@ -123,12 +123,12 @@ Public Class TreeListView
     ''' drag and drop events should be handled for the desired effect.
     ''' NOTE:  The ItemDrag event will always be fired regardless if this property is <c>TRUE</c> or <c>FALSE</c>.
     ''' </remarks>
-    <Category("Behavior"), _
-     DefaultValue(False), _
-     RefreshProperties(RefreshProperties.All), _
-     Description("Determines if the control will implement the DragDrop behavior within itself (not accepting data from other " & _
-                 "sources).  If setting this property to TRUE you must also set the 'AllowDrop' property to TRUE in order for " & _
-                 "it to work.  See the help file for more information on this property and how do handle it accordingly.")> _
+    <Category("Behavior"),
+     DefaultValue(False),
+     RefreshProperties(RefreshProperties.All),
+     Description("Determines if the control will implement the DragDrop behavior within itself (not accepting data from other " &
+                 "sources).  If setting this property to TRUE you must also set the 'AllowDrop' property to TRUE in order for " &
+                 "it to work.  See the help file for more information on this property and how do handle it accordingly.")>
     Public Property AllowDefaultDragDrop() As Boolean
         Get
             Return Me._DefaultDragDrop
@@ -143,9 +143,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value><c>TRUE</c> if Plus and Minus signs are always shown next to each node; otherwise <c>FALSE</c>.  The default is <c>FALSE</c>.</value>
     ''' <remarks></remarks>
-    <Category("Behavior"), _
-     DefaultValue(False), _
-     Description("Determines if Plus and Minus signs are always shown next to each node.")> _
+    <Category("Behavior"),
+     DefaultValue(False),
+     Description("Determines if Plus and Minus signs are always shown next to each node.")>
     Public Property AlwaysShowPlusMinus() As Boolean
         Get
             Return Me._AlwaysShowPM
@@ -164,10 +164,10 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>An Integer value.</value>
     ''' <remarks></remarks>
-    <Category("Behavior"), _
-     DefaultValue(GetType(Integer), "4"), _
-     Description("The amount the Vertical scroll will increment/decrement whenever a node or nodes are being dragged out of the visible area.  " & _
-                 "The larger the number, the faster the scroll.")> _
+    <Category("Behavior"),
+     DefaultValue(GetType(Integer), "4"),
+     Description("The amount the Vertical scroll will increment/decrement whenever a node or nodes are being dragged out of the visible area.  " &
+                 "The larger the number, the faster the scroll.")>
     Public Property DragScrollIncrement() As Integer
         Get
             Return Me._DragScroll
@@ -182,7 +182,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A TreeListNode with the current focus.</value>
     ''' <remarks></remarks>
-    <Browsable(False)> _
+    <Browsable(False)>
     Protected Friend ReadOnly Property FocusedNode() As TreeListNode
         Get
             Return Me._FirstSelectedNode
@@ -194,14 +194,14 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A Font value.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(GetType(Font), "System.Drawing.SystemFonts.DefaultFont"), _
-     Description("The Font used to display text in the control.")> _
-    Public Overrides Property Font() As System.Drawing.Font
+    <Category("Appearance"),
+     DefaultValue(GetType(Font), "System.Drawing.SystemFonts.DefaultFont"),
+     Description("The Font used to display text in the control.")>
+    Public Overrides Property Font() As Font
         Get
             Return MyBase.Font
         End Get
-        Set(ByVal Value As System.Drawing.Font)
+        Set(ByVal Value As Font)
             If (Not MyBase.Font.Equals(Value)) Then
                 MyBase.Font = Value
 
@@ -219,14 +219,14 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A Color value.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(GetType(Color), "WindowText"), _
-     Description("The foreground color used to display text and graphics in the control.")> _
-    Public Overrides Property ForeColor() As System.Drawing.Color
+    <Category("Appearance"),
+     DefaultValue(GetType(Color), "WindowText"),
+     Description("The foreground color used to display text and graphics in the control.")>
+    Public Overrides Property ForeColor() As Color
         Get
             Return MyBase.ForeColor
         End Get
-        Set(ByVal Value As System.Drawing.Color)
+        Set(ByVal Value As Color)
             If (Not MyBase.ForeColor.Equals(Value)) Then
                 MyBase.ForeColor = Value
 
@@ -244,9 +244,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>An enumerated type specifying which gridlines are shown on the control.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(GetType(GridLineSelections), "Column"), _
-     Description("Determines which gridlines will be shown.")> _
+    <Category("Appearance"),
+     DefaultValue(GetType(GridLineSelections), "Column"),
+     Description("Determines which gridlines will be shown.")>
     Public Shadows Property GridLines() As GridLineSelections
         Get
             Return MyBase.GridLines
@@ -301,9 +301,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value><c>TRUE</c> if the control should use the default open/closed folder images; otherwise <c>FALSE</c> if not.</value>
     ''' <remarks>NOTE:  Any custom image list will be overwritten with the default, internal image list if this is set to <c>TRUE</c>.</remarks>
-    <Category("Appearance"), _
-     DefaultValue(True), _
-     Description("Determines if the control should use the default open/closed folder images for nodes.")> _
+    <Category("Appearance"),
+     DefaultValue(True),
+     Description("Determines if the control should use the default open/closed folder images for nodes.")>
     Public Property DefaultFolderImages() As Boolean
         Get
             Return Me._UseDefaultFolders
@@ -323,11 +323,11 @@ Public Class TreeListView
     ''' <value>The default zero-based index of the image in the ImageList that is displayed for the TreeListNode when it is created. The default is 0.</value>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(0), _
-     Description("The default image index to use when creating nodes."), _
-     TypeConverter(GetType(ImageIndexConverter)), _
-     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))> _
+    <Category("Appearance"),
+     DefaultValue(0),
+     Description("The default image index to use when creating nodes."),
+     TypeConverter(GetType(ImageIndexConverter)),
+     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))>
     Public Property DefaultImageIndex() As Integer
         Get
             Return Me._DefaultImageIndex
@@ -344,11 +344,11 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>The zero-based default selected index of the image in the ImageList that is displayed for the TreeListNode when it is created. The default is 1.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(1), _
-     Description("The default selected image index to use when creating nodes."), _
-     TypeConverter(GetType(ImageIndexConverter)), _
-     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))> _
+    <Category("Appearance"),
+     DefaultValue(1),
+     Description("The default selected image index to use when creating nodes."),
+     TypeConverter(GetType(ImageIndexConverter)),
+     Editor("System.Windows.Forms.Design.ImageIndexEditor", GetType(UITypeEditor))>
     Public Property DefaultSelectedImageIndex() As Integer
         Get
             Return Me._DefaultSelectedIndex
@@ -363,9 +363,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>An Integer representing the Indent value of child nodes.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(19), _
-     Description("The Indent value of child nodes (in pixels)")> _
+    <Category("Appearance"),
+     DefaultValue(19),
+     Description("The Indent value of child nodes (in pixels)")>
     Public Property IndentSize() As Integer
         Get
             Return Me._Indent
@@ -383,10 +383,10 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A ContainerListViewItemCollection.</value>
     ''' <remarks>Items collection only used for a ContainerListView.  Use the Nodes collection instead.</remarks>
-    <XmlIgnore(), _
-     Browsable(False), _
-     EditorBrowsable(EditorBrowsableState.Never), _
-     Obsolete("Items collection is only used for a ContainerListView.  For a TreeListView, use the Nodes collection instead.", True)> _
+    <XmlIgnore(),
+     Browsable(False),
+     EditorBrowsable(EditorBrowsableState.Never),
+     Obsolete("Items collection is only used for a ContainerListView.  For a TreeListView, use the Nodes collection instead.", True)>
     Public Overrides ReadOnly Property Items() As ContainerListViewItemCollection
         Get
             Return MyBase.Items
@@ -398,11 +398,11 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A TreeListNode collection.</value>
     ''' <remarks></remarks>
-    <Category("Data"), _
-     Localizable(True), _
-     MergableProperty(False), _
-     Description("The collection of ChildNodes of the current Tree."), _
-     DesignerSerializationVisibility(DesignerSerializationVisibility.Content)> _
+    <Category("Data"),
+     Localizable(True),
+     MergableProperty(False),
+     Description("The collection of ChildNodes of the current Tree."),
+     DesignerSerializationVisibility(DesignerSerializationVisibility.Content)>
     Public ReadOnly Property Nodes() As TreeListNodeCollection
         Get
             Return Me._Nodes
@@ -414,9 +414,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A String value.  Default is '\' (without the quotes).</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(GetType(String), "\"), _
-     Description("The string to use as the path separator when using the FullPath property on a TreeListNode.")> _
+    <Category("Appearance"),
+     DefaultValue(GetType(String), "\"),
+     Description("The string to use as the path separator when using the FullPath property on a TreeListNode.")>
     Public Property PathSeparator() As String
         Get
             Return Me._PathDivider
@@ -433,9 +433,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A Color.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(GetType(Color), "ControlDark"), _
-     Description("The Color used for drawing Root lines of TreeListNodes.")> _
+    <Category("Appearance"),
+     DefaultValue(GetType(Color), "ControlDark"),
+     Description("The Color used for drawing Root lines of TreeListNodes.")>
     Public Property RootLineColor() As Color
         Get
             Return Me._RootLineColor
@@ -453,9 +453,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>An Integer representing the row height.</value>
     ''' <remarks></remarks>
-    <Category("Appearance"), _
-     DefaultValue(16), _
-     Description("Sets the RowHeight of the Items in the listview.")> _
+    <Category("Appearance"),
+     DefaultValue(16),
+     Description("Sets the RowHeight of the Items in the listview.")>
     Public Shadows Property RowHeight() As Integer
         Get
             Return MyBase.RowHeight
@@ -470,10 +470,10 @@ Public Class TreeListView
     ''' </summary>
     ''' <value>A collection of selected Indices</value>
     ''' <remarks></remarks>
-    <XmlIgnore(), _
-     Browsable(False), _
-     Obsolete("SelectedIndexes collection is used for a ContainerListView only.  TreeListViews do not support this property.", True), _
-     EditorBrowsable(EditorBrowsableState.Advanced)> _
+    <XmlIgnore(),
+     Browsable(False),
+     Obsolete("SelectedIndexes collection is used for a ContainerListView only.  TreeListViews do not support this property.", True),
+     EditorBrowsable(EditorBrowsableState.Advanced)>
     Public Shadows ReadOnly Property SelectedIndexes() As SelectedIndexCollection
         Get
             Return MyBase.SelectedIndexes
@@ -485,9 +485,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value><c>TRUE</c> if Lines are shown between sibling nodes and between parent and child nodess; otherwise <c>FALSE</c>.</value>
     ''' <remarks></remarks>
-    <Category("Behavior"), _
-     DefaultValue(True), _
-     Description("Determines if Lines are shown between sibling nodes and between parent and child nodes.")> _
+    <Category("Behavior"),
+     DefaultValue(True),
+     Description("Determines if Lines are shown between sibling nodes and between parent and child nodes.")>
     Public Property ShowLines() As Boolean
         Get
             Return Me._ShowLines
@@ -505,9 +505,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value><c>TRUE</c> if plus/minus signs are shown; otherwise <c>FALSE</c>.</value>
     ''' <remarks></remarks>
-    <Category("Behavior"), _
-     DefaultValue(True), _
-     Description("Determines whether plus/minus signs are shown next to parent nodes.")> _
+    <Category("Behavior"),
+     DefaultValue(True),
+     Description("Determines whether plus/minus signs are shown next to parent nodes.")>
     Public Property ShowPlusMinus() As Boolean
         Get
             Return Me._ShowPlusMinus
@@ -525,9 +525,9 @@ Public Class TreeListView
     ''' </summary>
     ''' <value><c>TRUE</c> if Lines are show between Root nodes; otherwise <c>FALSE</c>.</value>
     ''' <remarks></remarks>
-    <Category("Behavior"), _
-     DefaultValue(True), _
-     Description("Determines if Lines are shown between Root nodes.")> _
+    <Category("Behavior"),
+     DefaultValue(True),
+     Description("Determines if Lines are shown between Root nodes.")>
     Public Property ShowRootLines() As Boolean
         Get
             Return Me._ShowRootLines
@@ -790,7 +790,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="drgevent">A DragEventArgs that contains the event data. </param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnDragEnter(ByVal drgevent As System.Windows.Forms.DragEventArgs)
+    Protected Overrides Sub OnDragEnter(ByVal drgevent As DragEventArgs)
         If (Me._DefaultDragDrop AndAlso Me._InDrag) Then
             DragHelpers.ImageList_DragEnter(Me.Handle, drgevent.X - Me.Left, drgevent.Y - Me.Top)
         Else
@@ -825,7 +825,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">The EventArg containing the data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnDragLeave(ByVal e As System.EventArgs)
+    Protected Overrides Sub OnDragLeave(ByVal e As EventArgs)
         If (Me._DefaultDragDrop AndAlso Me._InDrag) Then
             DragHelpers.ImageList_DragLeave(Me.Handle)
         Else
@@ -838,7 +838,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="drgevent">A DragEventArgs that contains the event data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnDragOver(ByVal drgevent As System.Windows.Forms.DragEventArgs)
+    Protected Overrides Sub OnDragOver(ByVal drgevent As DragEventArgs)
         Dim DropNde As TreeListNode
         Dim Client As Point = Me.PointToClient(New Point(drgevent.X, drgevent.Y))
 
@@ -943,7 +943,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="gfbevent">A GiveFeedbackEventArgs that contains the event data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnGiveFeedback(ByVal gfbevent As System.Windows.Forms.GiveFeedbackEventArgs)
+    Protected Overrides Sub OnGiveFeedback(ByVal gfbevent As GiveFeedbackEventArgs)
         If (Me._DefaultDragDrop AndAlso Me._InDrag) Then
             If (gfbevent.Effect = DragDropEffects.Move) Then
                 gfbevent.UseDefaultCursors = False
@@ -984,7 +984,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A KeyEventArgs containing the data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnKeyDown(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overrides Sub OnKeyDown(ByVal e As KeyEventArgs)
         Select Case e.KeyCode
             Case Keys.Left, Keys.Right
                 MyBase.OnCheckShiftState(e)
@@ -1003,7 +1003,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A KeyEventArg containing the data.</param>
     ''' <remarks></remarks>
-    Protected Overridable Sub OnLeftRightKeys(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overridable Sub OnLeftRightKeys(ByVal e As KeyEventArgs)
         If (Me._Nodes.Count > 0 AndAlso Me._CurNode IsNot Nothing) Then
             Select Case e.KeyCode
                 Case Keys.Left 'COLLAPSE CURRENT NODE
@@ -1033,7 +1033,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A MouseEventArgs that contains the event data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnMouseDown(ByVal e As System.Windows.Forms.MouseEventArgs)
+    Protected Overrides Sub OnMouseDown(ByVal e As MouseEventArgs)
         'SET THIS VARIABLE BEFORE THE BASE CALL
         MyBase._ProcessRows = False
         MyBase.OnMouseDown(e)
@@ -1090,8 +1090,8 @@ Public Class TreeListView
                         Node.Toggle()
 
                     ElseIf (Me.CheckBoxClicked(MyBase._CheckBoxRects, e, TestObj)) Then
-                        If (e.Button = Windows.Forms.MouseButtons.Left) AndAlso _
-                           ((e.Clicks = 2 AndAlso (Me.CheckBoxSelection = ItemActivation.Standard OrElse Me.CheckBoxSelection = ItemActivation.TwoClick)) OrElse _
+                        If (e.Button = Windows.Forms.MouseButtons.Left) AndAlso
+                           ((e.Clicks = 2 AndAlso (Me.CheckBoxSelection = ItemActivation.Standard OrElse Me.CheckBoxSelection = ItemActivation.TwoClick)) OrElse
                              e.Clicks = 1 AndAlso (Me.CheckBoxSelection = ItemActivation.OneClick)) Then
                             Node = DirectCast(TestObj, TreeListNode)
 
@@ -1112,7 +1112,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A System.EventArgs that contains the Data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnMouseLeave(ByVal e As System.EventArgs)
+    Protected Overrides Sub OnMouseLeave(ByVal e As EventArgs)
         MyBase.OnMouseLeave(e)
 
         If (Me._LastNodeHovered IsNot Nothing) Then
@@ -1126,12 +1126,12 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A MouseEventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnMouseMove(ByVal e As System.Windows.Forms.MouseEventArgs)
+    Protected Overrides Sub OnMouseMove(ByVal e As MouseEventArgs)
         MyBase.OnMouseMove(e)
         If (Me._Nodes.Count > 0) Then
             Dim Node As TreeListNode = Nothing
 
-            If (MyBase.RowsRectangle.Contains(e.X, e.Y)) AndAlso ((Me._nodeRowClicked(e, Node)) OrElse _
+            If (MyBase.RowsRectangle.Contains(e.X, e.Y)) AndAlso ((Me._nodeRowClicked(e, Node)) OrElse
                (Me.CheckBoxClicked(MyBase._CheckBoxRects, e, DirectCast(Node, Object))) OrElse (Me._imageClicked(e, Node)) OrElse (Me.PlusMinusClicked(e, Node))) Then
 
                 If (Not Me._LastNodeHovered Is Node) Then
@@ -1162,7 +1162,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A KeyEventArgs.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnPageKeys(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overrides Sub OnPageKeys(ByVal e As KeyEventArgs)
         Select Case e.KeyCode
             Case Keys.Home
                 If (Me.VScroll.Visible) Then Me.VScroll.Value = 0
@@ -1220,7 +1220,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="qcdevent">A System.Windows.Forms.QueryContinueDragEventArgs that contains the event data.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnQueryContinueDrag(ByVal qcdevent As System.Windows.Forms.QueryContinueDragEventArgs)
+    Protected Overrides Sub OnQueryContinueDrag(ByVal qcdevent As QueryContinueDragEventArgs)
         If (qcdevent.Action = DragAction.Cancel OrElse qcdevent.EscapePressed) Then
             'RESET THE DRAG VARIABLES
             Me._InDrag = False
@@ -1237,7 +1237,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">an EventArg.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnResize(ByVal e As System.EventArgs)
+    Protected Overrides Sub OnResize(ByVal e As EventArgs)
         MyBase.OnResize(e)
 
         Me.Invalidate()
@@ -1273,7 +1273,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A KeyEventArgs.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnSpaceBarKey(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overrides Sub OnSpaceBarKey(ByVal e As KeyEventArgs)
         If (e.Shift) Then
             MyBase.OnSpaceBarKey(e)
             Exit Sub
@@ -1292,7 +1292,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="e">A KeyEventArgs.</param>
     ''' <remarks></remarks>
-    Protected Overrides Sub OnUpDownKeys(ByVal e As System.Windows.Forms.KeyEventArgs)
+    Protected Overrides Sub OnUpDownKeys(ByVal e As KeyEventArgs)
         Dim TestNode As TreeListNode = Nothing
 
         Select Case e.KeyCode
@@ -1325,7 +1325,7 @@ Public Class TreeListView
     ''' <param name="aNode">A Node (can be <c>NOTHING</c>) to assist in evaluation.</param>
     ''' <returns><c>TRUE</c> if a Plus or Minus was clicked; otherwise <c>FALSE</c>.</returns>
     ''' <remarks>aNode will be set to the Node the plus or minus was clicked on.</remarks>
-    Protected Friend Function PlusMinusClicked(ByVal e As System.Windows.Forms.MouseEventArgs, ByRef aNode As TreeListNode) As Boolean
+    Protected Friend Function PlusMinusClicked(ByVal e As MouseEventArgs, ByRef aNode As TreeListNode) As Boolean
         If (Me._PlusMinusRects IsNot Nothing) Then
             aNode = DirectCast(Tools.EvaluateObject(e, Me._PlusMinusRects.Keys.GetEnumerator, Me._PlusMinusRects.Values.GetEnumerator), TreeListNode)
 
@@ -1354,7 +1354,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="aNode">The TreeListNode calling the method.</param>
     ''' <remarks></remarks>
-    <EditorBrowsable(EditorBrowsableState.Never)> _
+    <EditorBrowsable(EditorBrowsableState.Never)>
     Friend Sub TreeListViewAfterCollapse(ByVal aNode As TreeListNode)
         If (aNode IsNot Nothing) Then Me.OnAfterCollapse(New TreeListViewEventArgs(aNode, TreeViewAction.Collapse))
     End Sub
@@ -1364,7 +1364,7 @@ Public Class TreeListView
     ''' </summary>
     ''' <param name="aNode">The TreeListNode calling the method.</param>
     ''' <remarks></remarks>
-    <EditorBrowsable(EditorBrowsableState.Never)> _
+    <EditorBrowsable(EditorBrowsableState.Never)>
     Friend Sub TreeListViewAfterExpand(ByVal aNode As TreeListNode)
         If (aNode IsNot Nothing) Then Me.OnAfterExpand(New TreeListViewEventArgs(aNode, TreeViewAction.Expand))
     End Sub
@@ -1375,7 +1375,7 @@ Public Class TreeListView
     ''' <param name="aNode">The TreeListNode calling the method.</param>
     ''' <returns><c>TRUE</c> if the call to the 'OnAfter' equivalent method should be cancelled; othewise <c>FALSE</c>.</returns>
     ''' <remarks></remarks>
-    <EditorBrowsable(EditorBrowsableState.Never)> _
+    <EditorBrowsable(EditorBrowsableState.Never)>
     Friend Function TreeListViewBeforeCollapse(ByVal aNode As TreeListNode) As Boolean
         If (aNode IsNot Nothing) Then
             Dim Arg As New TreeListViewCancelEventArgs(aNode, False, TreeViewAction.Collapse)
@@ -1393,7 +1393,7 @@ Public Class TreeListView
     ''' <param name="aNode">The TreeListNode calling the method.</param>
     ''' <returns><c>TRUE</c> if the call to the 'OnAfter' equivalent method should be cancelled; othewise <c>FALSE</c>.</returns>
     ''' <remarks></remarks>
-    <EditorBrowsable(EditorBrowsableState.Never)> _
+    <EditorBrowsable(EditorBrowsableState.Never)>
     Friend Function TreeListViewBeforeExpand(ByVal aNode As TreeListNode) As Boolean
         If (aNode IsNot Nothing) Then
             Dim Arg As New TreeListViewCancelEventArgs(aNode, False, TreeViewAction.Expand)
@@ -1515,7 +1515,7 @@ Public Class TreeListView
         aNode.ChangeGlobalFont(Me.Font)
 
         'NOW DO THE SUBITEMS
-        For Each SU As ContainerListViewItem.ContainerListViewSubItem In aNode.SubItems
+        For Each SU As ContainerListViewSubItem In aNode.SubItems
             SU.ChangeGlobalFont(Me.Font)
         Next
 
@@ -1529,7 +1529,7 @@ Public Class TreeListView
         aNode.ChangeGlobalForeColor(Me.ForeColor)
 
         'NOW DO THE SUBITEMS
-        For Each SU As ContainerListViewItem.ContainerListViewSubItem In aNode.SubItems
+        For Each SU As ContainerListViewSubItem In aNode.SubItems
             SU.ChangeGlobalForeColor(Me.ForeColor)
         Next
 
@@ -1607,7 +1607,7 @@ Public Class TreeListView
 
             'DRAW THE "MORE NODES" TEXT IF NECESSARY
             If (DrawFooter) Then
-                Gr.DrawString(("+" & Me.SelectedItems.Count - MaxNodes).ToString & " more nodes...", Me.Font, Brushes.Blue, _
+                Gr.DrawString(("+" & Me.SelectedItems.Count - MaxNodes).ToString & " more nodes...", Me.Font, Brushes.Blue,
                               18 + X_OffSet, Ht - (Me.RowHeight * 2))
             End If
 
@@ -1788,7 +1788,7 @@ Public Class TreeListView
         Return Nothing
     End Function
 
-    Private Function _imageClicked(ByVal e As System.Windows.Forms.MouseEventArgs, ByRef aNode As TreeListNode) As Boolean
+    Private Function _imageClicked(ByVal e As MouseEventArgs, ByRef aNode As TreeListNode) As Boolean
         If (Me._ImageRects IsNot Nothing) Then
             aNode = DirectCast(Tools.EvaluateObject(e, Me._ImageRects.Keys.GetEnumerator, Me._ImageRects.Values.GetEnumerator), TreeListNode)
             If (aNode Is Nothing) Then Return False
@@ -1825,7 +1825,6 @@ Public Class TreeListView
             End If
         End If
     End Sub
-
     Private Sub _moveToIndex(ByVal aIndex As Integer)
         If (aIndex < 0 OrElse aIndex >= Me._Nodes.Count) Then Exit Sub
 
@@ -1847,7 +1846,7 @@ Public Class TreeListView
         Me.Invalidate()
     End Sub
 
-    Private Function _nodeRowClicked(ByVal e As System.Windows.Forms.MouseEventArgs, ByRef aNode As TreeListNode) As Boolean
+    Private Function _nodeRowClicked(ByVal e As MouseEventArgs, ByRef aNode As TreeListNode) As Boolean
         If (Not Me._NodeRowRects Is Nothing) Then
             aNode = DirectCast(Tools.EvaluateObject(e, Me._NodeRowRects.Keys.GetEnumerator, Me._NodeRowRects.Values.GetEnumerator), TreeListNode)
             If (aNode Is Nothing) Then Return False

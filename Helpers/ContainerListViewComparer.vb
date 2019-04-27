@@ -82,7 +82,7 @@ Namespace Helpers
         ''' <param name="y">Second object to compare.</param>
         ''' <returns>A Integer value indicating whether one is less than, equal to or greater than the other.</returns>
         ''' <remarks></remarks>
-        Public Overloads Function Compare(ByVal x As Object, ByVal y As Object) As Integer Implements System.Collections.IComparer.Compare
+        Public Overloads Function Compare(ByVal x As Object, ByVal y As Object) As Integer Implements IComparer.Compare
             Dim LVx As String = String.Empty
             Dim LVy As String = String.Empty
             Dim ReturnVal As Integer = -1
@@ -195,14 +195,14 @@ Namespace Helpers
         ''' <param name="aObj2">Second object to compare.</param>
         ''' <returns>A Integer value indicating whether one is less than, equal to or greater than the other.</returns>
         ''' <remarks></remarks>
-        Public Overloads Function Compare(ByVal aObj1 As Object, ByVal aObj2 As Object) As Integer Implements System.Collections.IComparer.Compare
-            Dim PI01 As Reflection.PropertyInfo
-            Dim PI02 As Reflection.PropertyInfo
+        Public Overloads Function Compare(ByVal aObj1 As Object, ByVal aObj2 As Object) As Integer Implements IComparer.Compare
+            Dim PI01 As PropertyInfo
+            Dim PI02 As PropertyInfo
             Dim ReturnVal As Integer
 
             'CONVERT
-            PI01 = DirectCast(aObj1, Reflection.PropertyInfo)
-            PI02 = DirectCast(aObj2, Reflection.PropertyInfo)
+            PI01 = DirectCast(aObj1, PropertyInfo)
+            PI02 = DirectCast(aObj2, PropertyInfo)
 
             ReturnVal = String.Compare(PI01.Name, PI02.Name, StringComparison.OrdinalIgnoreCase)
 

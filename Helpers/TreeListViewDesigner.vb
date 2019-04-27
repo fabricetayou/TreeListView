@@ -41,7 +41,7 @@ Namespace Design
         ''' </summary>
         ''' <value>A DesignerVerbCollection of DesignerVerb objects, or a null reference (Nothing in Visual Basic) if no designer verbs are available.</value>
         ''' <remarks></remarks>
-        Public Overrides ReadOnly Property Verbs() As System.ComponentModel.Design.DesignerVerbCollection
+        Public Overrides ReadOnly Property Verbs() As DesignerVerbCollection
             Get
                 Return Me._Verbs
             End Get
@@ -71,7 +71,7 @@ Namespace Design
         ''' The GetHitTest method determines whether a click at the specified point should be passed to the control, while the control is in design mode. 
         ''' You can override and implement this method to enable your control to receive clicks in the design-time environment.
         ''' </remarks>
-        Protected Overrides Function GetHitTest(ByVal point As System.Drawing.Point) As Boolean
+        Protected Overrides Function GetHitTest(ByVal point As Point) As Boolean
             Dim Valid As Boolean = MyBase.GetHitTest(point)
 
             'THE BASE GETHITTEST CHECKS IF A COLUMN OR SCROLLBAR WAS CLICKED.  IF NOT, THEN TEST FOR A NODE

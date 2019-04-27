@@ -156,7 +156,7 @@ Namespace Collections
         Protected Overridable Sub OnRemoveProcessing(ByVal aCObj As ContainerListViewObject)
             aCObj.SetParent(Nothing)
 
-            For Each Slvi As ContainerListViewItem.ContainerListViewSubItem In aCObj.SubItems
+            For Each Slvi As ContainerListViewSubItem In aCObj.SubItems
                 If (Slvi.Control IsNot Nothing) Then
                     Slvi.Control.Parent.Controls.Remove(Slvi.Control)
                     Slvi.Control.Parent = Nothing
@@ -332,7 +332,7 @@ Namespace Collections
             MyBase.OnAddProcessing(aClObj, aIndex)
 
             aClObj.SetParent(Me._Parent)
-            For Each Slvi As ContainerListViewItem.ContainerListViewSubItem In aClObj.SubItems
+            For Each Slvi As ContainerListViewSubItem In aClObj.SubItems
                 If (Slvi.Control IsNot Nothing) Then
                     Slvi.Control.Parent = Me._Parent
                     Slvi.Control.Visible = True
@@ -1107,7 +1107,7 @@ Namespace Collections
         ''' <param name="aSubItem">The SubItem to Add.</param>
         ''' <returns>An Integer representing the zero-based Index within the collection.</returns>
         ''' <remarks></remarks>
-        <System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId:="a")> Public Function Add(ByVal aSubItem As ContainerListViewSubItem) As Integer
+        <CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId:="a")> Public Function Add(ByVal aSubItem As ContainerListViewSubItem) As Integer
             Return Me.List.Add(aSubItem)
         End Function
 

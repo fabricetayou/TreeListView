@@ -5,7 +5,7 @@ Namespace Design
     ''' </summary>
     ''' <remarks></remarks>
     Friend Class ContainerListViewDesigner
-        Inherits System.Windows.Forms.Design.ControlDesigner
+        Inherits ControlDesigner
 
 #Region " Constructors and Destructors "
 
@@ -50,7 +50,7 @@ Namespace Design
         ''' If this collection contains references to other components in the current design mode document, those components will be copied along with the component managed by the designer during a copy operation.  
         ''' When the component managed by the designer is selected, this collection is filled with any nested controls. This collection can also include other components, such as the buttons of a toolbar.
         ''' </remarks>
-        Public Overrides ReadOnly Property AssociatedComponents() As System.Collections.ICollection
+        Public Overrides ReadOnly Property AssociatedComponents() As ICollection
             Get
                 Return Me.Control.Columns
             End Get
@@ -122,7 +122,7 @@ Namespace Design
         ''' The GetHitTest method determines whether a click at the specified point should be passed to the control, while the control is in design mode. 
         ''' You can override and implement this method to enable your control to receive clicks in the design-time environment.
         ''' </remarks>
-        Protected Overrides Function GetHitTest(ByVal point As System.Drawing.Point) As Boolean
+        Protected Overrides Function GetHitTest(ByVal point As Point) As Boolean
             Dim HRect, VRect As Rectangle
             Dim Pnt As Point = Me.Control.PointToClient(point)
             Dim MsArg As New MouseEventArgs(MouseButtons.Left, 1, Pnt.X, Pnt.Y, 0)
@@ -155,7 +155,7 @@ Namespace Design
         ''' </summary>
         ''' <param name="component">The IComponent to associate the designer with. This component must always be an instance of, or derive from, Control.</param>
         ''' <remarks>The IComponent to associate the designer with. This component must always be an instance of, or derive from, Control.</remarks>
-        Public Overrides Sub Initialize(ByVal component As System.ComponentModel.IComponent)
+        Public Overrides Sub Initialize(ByVal component As IComponent)
             MyBase.Initialize(component)
 
             'INITIALIZE CLASS VARIABLES
@@ -178,7 +178,7 @@ Namespace Design
         ''' </summary>
         ''' <param name="pe">A PaintEventArgs the designer can use to draw on the control.</param>
         ''' <remarks></remarks>
-        Protected Overrides Sub OnPaintAdornments(ByVal pe As System.Windows.Forms.PaintEventArgs)
+        Protected Overrides Sub OnPaintAdornments(ByVal pe As PaintEventArgs)
             MyBase.OnPaintAdornments(pe)
 
             If (Me._SelSvc.PrimarySelection Is Me._SelCol) Then
@@ -203,7 +203,7 @@ Namespace Design
         ''' </summary>
         ''' <param name="properties">An IDictionary containing the properties for the class of the component.</param>
         ''' <remarks></remarks>
-        Protected Overrides Sub PreFilterProperties(ByVal properties As System.Collections.IDictionary)
+        Protected Overrides Sub PreFilterProperties(ByVal properties As IDictionary)
             MyBase.PreFilterProperties(properties)
 
             'REPLACE SELECTED PROPERTIES WITH OUR SHADOWED ONES
@@ -249,7 +249,7 @@ Namespace Design
             'THE CONSTRUCTOR ALSO.
         End Sub
 
-        Private Sub _selectionChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+        Private Sub _selectionChanged(ByVal sender As Object, ByVal e As EventArgs)
             Dim NewSelCol As ContainerColumnHeader = Nothing
 
             'SEE IF THE PRIMARY SELECTION IS ONE OF THE COLUMNS
